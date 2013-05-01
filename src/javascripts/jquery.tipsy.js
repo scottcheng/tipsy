@@ -73,7 +73,8 @@
                 }
                 
                 if (this.options.fade) {
-                    $tip.stop().css({opacity: 0, display: 'block', visibility: 'visible'}).animate({opacity: this.options.opacity});
+                    $tip.stop().css({opacity: 0, display: 'block', visibility: 'visible'}).animate({opacity: this.options.opacity},
+                        this.options.fadeInDuration ? this.options.fadeInDuration : this.options.fadeDuration);
                 } else {
                     $tip.css({visibility: 'visible', opacity: this.options.opacity});
                 }
@@ -82,7 +83,8 @@
         
         hide: function() {
             if (this.options.fade) {
-                this.tip().stop().fadeOut(function() { $(this).remove(); });
+                this.tip().stop().fadeOut(this.options.fadeOutDuration ? this.options.fadeOutDuration : this.options.fadeDuration,
+                    function() { $(this).remove(); });
             } else {
                 this.tip().remove();
             }
@@ -189,6 +191,7 @@
         delayIn: 0,
         delayOut: 0,
         fade: false,
+        fadeDuration: 400,
         fallback: '',
         gravity: 'n',
         html: false,
